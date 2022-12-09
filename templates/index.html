@@ -1,0 +1,21 @@
+<form action="/after" method="POST">
+<input id="main" name="text"></input>
+</form>
+<h2>suggested:</h3><h4 id="sg"></h4>
+<script>
+var input = document.getElementById("main")
+
+input.addEventListener('keypress',((e)=>{
+    if(e.key == 'Spacebar' || e.key == ' '){
+        var xhttp = new XMLHttpRequest();
+    var inputtext = document.getElementById("main").value
+    xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+     document.getElementById("sg").innerHTML = xhttp.responseText
+    }
+};
+xhttp.open("POST", "/after", true);
+xhttp.send(JSON.stringify({"text":`${inputtext}`}));
+    }
+}))
+</script>
